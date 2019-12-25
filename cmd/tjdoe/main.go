@@ -2,12 +2,10 @@ package main
 
 import (
 	crand "crypto/rand"
-	"encoding/csv"
 	"fmt"
 	"math"
 	"math/big"
 	"os"
-	"strconv"
 
 	flag "github.com/spf13/pflag"
 	"github.com/tamada/tjdoe"
@@ -93,56 +91,17 @@ func printVersionAndOrHelp(prog string, opts *options) int {
 	return 0
 }
 
-func contains(array []string, value string) bool {
-	for _, item := range array {
-		if item == value {
-			return true
-		}
-	}
-	return false
-}
-
-func assignmentNames(assignments []string, scores map[string]int) []string {
-	for key, _ := range scores {
-		if !contains(assignments, key) {
-			assignments = append(assignments, key)
-		}
-	}
-	return assignments
-}
-
-func createHeader(students []*tjdoe.Student) []string {
-	assignments := []string{}
-	for _, student := range students {
-		assignments = assignmentNames(assignments, student.Scores)
-	}
-	header := []string{"id", "final score"}
-	header = append(header, assignments...)
-	return header
-}
-
-func outputAnonymizedScores(students []*tjdoe.Student, dest string) int {
+func outputAnonymizedScores(tjdoe *tjdoe.TJDoe, students []*tjdoe.Student, dest string) int {
 	file, err := os.OpenFile(dest, os.O_CREATE, 0755)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 3
 	}
 	defer file.Close()
-	header := createHeader(students)
-	writer := csv.NewWriter(file)
-	writer.Write(header)
-	labels := header[2:]
-	for _, student := range students {
-		array := []string{student.AnonymizedID, student.AnonymizedFinalScore}
-		for _, label := range labels {
-			value, ok := student.Scores[label]
-			valueString := strconv.Itoa(value)
-			if !ok {
-				valueString = ""
-			}
-			array = append(array, valueString)
-		}
-		writer.Write(array)
+	err = tjdoe.OutputAnonymizedScores(students, file)
+	if err != nil {
+		fmt.Println(err.Error())
+		return 4
 	}
 	return 0
 }
@@ -155,7 +114,7 @@ func perform(opts *options, args []string) int {
 	}
 	mapping := tjdoe.BuildMapping(students)
 	tjdoe.AnonymizeDirectory(args[0], opts.dest, mapping)
-	return outputAnonymizedScores(students, opts.mapping)
+	return outputAnonymizedScores(tjdoe, students, opts.mapping)
 }
 
 func goMain(args []string) int {
