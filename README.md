@@ -1,9 +1,9 @@
-[![License](https://img.shields.io/badge/License-WTFPL-blue.svg)](https://github.com/tamada/jjdoe/blob/master/LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.0.0-yellowgreen.svg)](https://github.com/tamada/jjdoe/releases/tag/v1.0.0)
+[![License](https://img.shields.io/badge/License-Apache%02d2.0-blue.svg)](https://github.com/tamada/tjdoe/blob/master/LICENSE)
+[![Version](https://img.shields.io/badge/Version-1.0.0-yellowgreen.svg)](https://github.com/tamada/tjdoe/releases/tag/v1.0.0)
 
-# jjdoes
+# tjdoe
 
-`jjdoes` anonymize given programs for programming courses and their s score for grades.
+`tjdoe` anonymizes given programs for programming courses and their s score for grades.
 
 ## Install
 
@@ -11,19 +11,19 @@
 
 ```sh
 $ brew tap tamada/brew
-$ brew install jjdoes
+$ brew install tjdoe
 ```
 
 ### Go lang
 
 ```sh
-$ go get github.com/tamada/jjdoes
+$ go get github.com/tamada/tjdoe
 ```
 
 ### Build from source codes
 
 ```sh
-$ git clone https://github.com/tamada/jjdoes.git
+$ git clone https://github.com/tamada/tjdoe.git
 $ cd jjdoes
 $ make
 ```
@@ -33,8 +33,8 @@ $ make
 ### CLI
 
 ```sh
-$ jjdoes --help
-jjdoes [OPTIONS] <ROOT_DIR> <SCORES...>
+$ tjdoe --help
+tjdoe [OPTIONS] <ROOT_DIR> <SCORES...>
 OPTIONS
     -d, --dest <DIR>           specifies destination of anonymized programs.
                                if this option was not specified, output to 'dest' directory.
@@ -56,7 +56,7 @@ SCORES...
 ### Docker
 
 ```sh
-$ docker run --rm -v $PWD:/home/jjdoes tamada/jjdoes:1.0.0 rootdir scores.csv...
+$ docker run --rm -v $PWD:/home/jjdoes tamada/tjdoe:1.0.0 rootdir scores.csv...
 ```
 
 Above command should run on directory which has `scores.csv` and `rootdir`.
@@ -65,8 +65,8 @@ The meaning of the options above command are as follows.
 
 * `--rm`
     * remove container after running Docker.
-* `-v $PWD:/home/jjdoes`
-    * share volumen `$PWD` in the host OS to `/home/jjdoes` in the container OS.
+* `-v $PWD:/home/tjdoe`
+    * share volumen `$PWD` in the host OS to `/home/tjdoe` in the container OS.
     * Note that `$PWD` must be the absolute path.
 
 ## About
@@ -75,6 +75,6 @@ The meaning of the options above command are as follows.
 
 * Haruaki Tamada
 
-### `jjdoes`
+### `tjdoe`
 
-`jjdoes` means to convert programs into John Doe and Jane Doe.
+`tjdoe` means 'to John/Jane Doe.'
