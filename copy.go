@@ -6,7 +6,9 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
+	"time"
 )
 
 /*
@@ -73,9 +75,21 @@ func updateName(tjdoe *TJDoe, name string) string {
 	return name
 }
 
+func isYear(name string) bool {
+	if len(name) != 4 || !isNumeric(name) {
+		return false
+	}
+	year, _ := strconv.Atoi(name)
+	now := time.Now()
+	return year > 1970 && year <= now.Year()+1
+}
+
 func updateBase(tjdoe *TJDoe, to string) string {
 	dir := filepath.Dir(to)
 	base := updateName(tjdoe, filepath.Base(to))
+	if isYear(base) {
+		base = "0000"
+	}
 	return filepath.Join(dir, base)
 }
 
@@ -88,7 +102,7 @@ func makeDirectories(tjdoe *TJDoe, path string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	base := updateName(tjdoe, filepath.Base(path))
+	base := updateBase(tjdoe, filepath.Base(path))
 	newPath := filepath.Join(dir, base)
 	return newPath, os.Mkdir(filepath.Join(dir, base), os.ModePerm)
 }

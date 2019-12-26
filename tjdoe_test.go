@@ -43,7 +43,7 @@ func TestCopyDirectories(t *testing.T) {
 	tjdoe.AnonymizeDirectory("testdata/assignments", "testdata/anonymity", students)
 	defer os.RemoveAll("testdata/anonymity")
 
-	paths := []string{"2019/2245bd5f/c/hello.c", "2019/2245bd5f/go/hello.go", "2019/2245bd5f/java/HelloWorld_2245bd5f.java", "2019/2245bd5f/node/hello.js"}
+	paths := []string{"0000/2245bd5f/c/hello.c", "0000/2245bd5f/go/hello.go", "0000/2245bd5f/java/HelloWorld_2245bd5f.java", "0000/2245bd5f/node/hello.js"}
 	for _, path := range paths {
 		_, err := os.Stat(filepath.Join("testdata/anonymity", path))
 		if err != nil { // file did not exists
