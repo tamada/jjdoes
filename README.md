@@ -1,62 +1,66 @@
-[![License](https://img.shields.io/badge/License-WTFPL-blue.svg)](https://github.com/tamada/jjdoe/blob/master/LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.0.0-yellowgreen.svg)](https://github.com/tamada/jjdoe/releases/tag/v1.0.0)
+[![Build Status](https://travis-ci.com/tamada/tjdoe.svg?branch=master)](https://travis-ci.com/tamada/tjdoe)
+[![Coverage Status](https://coveralls.io/repos/github/tamada/tjdoe/badge.svg?branch=master)](https://coveralls.io/github/tamada/tjdoe?branch=master)
+[![codebeat badge](https://codebeat.co/badges/146e0708-dd30-405c-ae4b-9d1e4c2626e2)](https://codebeat.co/projects/github-com-tamada-tjdoe-master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tamada/tjdoe)](https://goreportcard.com/report/github.com/tamada/tjdoe)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/tamada/tjdoe/blob/master/LICENSE)
+[![Version](https://img.shields.io/badge/Version-1.0.0-yellowgreen.svg)](https://github.com/tamada/tjdoe/releases/tag/v1.0.0)
 
-# jjdoes
+# tjdoe
 
-`jjdoes` anonymize given programs for programming courses and their s score for grades.
+`tjdoe` anonymizes given programs for programming courses and their scores for grades.
 
 ## Install
 
-### Homebrew
+### :beer: Homebrew
 
 ```sh
 $ brew tap tamada/brew
-$ brew install jjdoes
+$ brew install tjdoe
 ```
 
 ### Go lang
 
 ```sh
-$ go get github.com/tamada/jjdoes
+$ go get github.com/tamada/tjdoe
 ```
 
-### Build from source codes
+### :hammer_and_wrench: Build from source codes
 
 ```sh
-$ git clone https://github.com/tamada/jjdoes.git
-$ cd jjdoes
+$ git clone https://github.com/tamada/tjdoe.git
+$ cd tjdoe
 $ make
 ```
 
-## Usage
+## :fork_and_knife: Usage
 
 ### CLI
 
 ```sh
-$ jjdoes --help
-jjdoes [OPTIONS] <ROOT_DIR> <SCORES...>
+$ tjdoe --help
+tjdoe [OPTIONS] <ROOT_DIR> <SCORES...>
 OPTIONS
-    -d, --dest <DIR>           specifies destination of anonymized programs.
-                               if this option was not specified, output to 'dest' directory.
-    -m, --mapping <MAPPING>    specifies id mapping file. default is `mapping.csv`
-    -s, --seed <SEED>          specifies seed for random values.
-    -h, --help                 print this message and exit.
-    -v, --version              print version and exit.
+    -d, --dest <DIR>       specifies destination of anonymized programs.
+                           if this option was not specified, output to 'dest' directory.
+    -s, --score <SCORE>    specifies id mapping file. default is 'anonymized_score.csv'
+    -S, --seed <SEED>      specifies seed for random values.
+    -h, --help             print this message and exit.
+    -v, --version          print version and exit.
 ROOT_DIR
     the directory contains the programs.  The layout of the directory is arbitrary.
     The user arbitrary defines the names of sub-directories and files.
 SCORES...
-    show score file, the first row is the header, and following rows
-    represent each student, and must be formatted as follows.  The
-    first column is id, the second column shows the name, the third
-    column is the final score, and the following columns represent the
-    scores of assignments.
+    show score file, the first row is the header, and the following rows
+    represent each student and must be formatted as follows.
+    The first column is the id, the second column shows the name by dividing
+    the surname the given name with space, the third column is the final score,
+    and the following columns represent the scores of assignments.
 ```
 
-### Docker
+### :whale: Docker
 
 ```sh
-$ docker run --rm -v $PWD:/home/jjdoes tamada/jjdoes:1.0.0 rootdir scores.csv...
+$ docker run --rm -v $PWD:/home/jjdoes tamada/tjdoe:1.0.0 rootdir scores.csv...
 ```
 
 Above command should run on directory which has `scores.csv` and `rootdir`.
@@ -65,16 +69,35 @@ The meaning of the options above command are as follows.
 
 * `--rm`
     * remove container after running Docker.
-* `-v $PWD:/home/jjdoes`
-    * share volumen `$PWD` in the host OS to `/home/jjdoes` in the container OS.
+* `-v $PWD:/home/tjdoe`
+    * share volumen `$PWD` in the host OS to `/home/tjdoe` in the container OS.
     * Note that `$PWD` must be the absolute path.
+
+## Others
+
+### Anonymity rules
+
+* Change directory names representing year (four-digit numbers) to `0000`.
+* Change file names, and directory names contains id, name to anonymized id.
+    * id and name are obtained from `scores.csv`.
+* Replace ids and names appearing in the content of the files, to anonymized id.
+    * if there are students have the same surnames, every anonymized ids will be listed.
+
+### Example of `score.csv`
+
+```csv
+id,name,final score,a01,a02,a03,a04,a05,a06,a07,a08,a09,a10
+123456,Tamada Haruaki,87,5,6,7,4,3,1,8,9,8,6
+234567,Yamamoto Taro,53,4,3,3,2,3,,,,,4
+345678,山本 次郎,95,10,10,10,10,10,10,,10,10,
+```
 
 ## About
 
 ### Developers
 
-* Haruaki Tamada
+* [Haruaki Tamada](https://tamada.github.io) [:octocat:](https://github.com/tamada)
 
-### `jjdoes`
+### `tjdoe`
 
-`jjdoes` means to convert programs into John Doe and Jane Doe.
+`tjdoe` means 'to John/Jane Doe.'
