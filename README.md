@@ -24,7 +24,7 @@ $ go get github.com/tamada/tjdoe
 
 ```sh
 $ git clone https://github.com/tamada/tjdoe.git
-$ cd jjdoes
+$ cd tjdoe
 $ make
 ```
 
