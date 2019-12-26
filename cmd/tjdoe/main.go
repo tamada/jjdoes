@@ -41,11 +41,11 @@ ROOT_DIR
     the directory contains the programs.  The layout of the directory is arbitrary.
     The user arbitrary defines the names of sub-directories and files.
 SCORES...
-    show score file, the first row is the header, and following rows
-    represent each student, and must be formatted as follows.  The
-    first column is id, the second column shows the name, the third
-    column is the final score, and the following columns represent the
-    scores of assignments.`, prog)
+    show score file, the first row is the header, and the following rows
+    represent each student and must be formatted as follows.
+    The first column is the id, the second column shows the name by dividing
+    the surname the given name with space, the third column is the final score,
+    and the following columns represent the scores of assignments.`, prog)
 }
 
 func buildFlagSet() (*flag.FlagSet, *options) {
