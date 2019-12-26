@@ -1,6 +1,7 @@
 GO=go
 NAME := tjdoe
 VERSION := 1.0.0
+DIST := $(NAME)-$(VERSION)
 
 all: test build
 
@@ -19,11 +20,25 @@ update_version:
 	@echo "Replace version to \"${VERSION}\""
 
 test: setup
-	$(GO) test -covermode=count -coverprofile=coverage.out $$(go list ./... | grep -v vendor)
+	$(GO) test -covermode=count -coverprofile=coverage.out $$(go list ./...)
 
 build: setup
 	$(GO) build -o $(NAME) -v cmd/tjdoe/main.go
 
+define _createDist
+	mkdir -p dist/$(1)_$(2)/$(DIST)
+	GOOS=$1 GOARCH=$2 go build -o dist/$(1)_$(2)/$(DIST)/$(NAME) cmd/$(NAME)/main.go
+	cp -r README.md LICENSE dist/$(1)_$(2)/$(DIST)
+	tar cfz dist/$(DIST)_$(1)_$(2).tar.gz -C dist/$(1)_$(2) $(DIST)
+endef
+
+dist: build
+	@$(call _createDist,darwin,386)
+	@$(call _createDist,windows,amd64)
+	@$(call _createDist,windows,386)
+	@$(call _createDist,linux,amd64)
+	@$(call _createDist,linux,386)
+
 clean:
 	$(GO) clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) dist
