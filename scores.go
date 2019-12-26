@@ -80,31 +80,6 @@ func familyName(name string) string {
 	return strings.Split(name, " ")[0]
 }
 
-func convertToMappingSlice(mapping map[string]string) []Mapping {
-	results := []Mapping{}
-	for key, value := range mapping {
-		results = append(results, Mapping{fromID: key, toID: value})
-	}
-	sort.Slice(results, func(i, j int) bool {
-		return len(results[i].fromID) > len(results[j].fromID)
-	})
-	return results
-}
-
-/*
-BuildMappings creates Mapping array from given students.
-*/
-func (tjdoe *TJDoe) BuildMappings(students []*Student) []Mapping {
-	mapping := map[string]string{}
-	for _, student := range students {
-		updateMapping(mapping, student.AnonymizedID, student.ID)
-		updateMapping(mapping, student.AnonymizedID, student.Name)
-		updateMapping(mapping, student.AnonymizedID, familyName(student.Name))
-		updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, familyName(student.Name)))
-	}
-	return convertToMappingSlice(mapping)
-}
-
 func isValidID(newID string, ids []string) bool {
 	for _, id := range ids {
 		if id == newID {
@@ -131,7 +106,7 @@ func (tjdoe *TJDoe) anonymize(students []*Student) []*Student {
 		ids = append(ids, id)
 	}
 	sort.Slice(students, func(i, j int) bool {
-		return strings.Compare(students[i].AnonymizedID, students[j].AnonymizedID) > 0
+		return strings.Compare(students[i].AnonymizedID, students[j].AnonymizedID) < 0
 	})
 	return students
 }

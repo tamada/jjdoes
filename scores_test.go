@@ -9,8 +9,8 @@ func TestBuildScores(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	if len(students) != 1 {
-		t.Errorf("rows count did not match, wont 1, got %d", len(students))
+	if len(students) != 3 {
+		t.Errorf("rows count did not match, wont 3, got %d", len(students))
 	}
 	s := students[0]
 	if s.String() != "123456,Tamada Haruaki,87" {
@@ -19,7 +19,6 @@ func TestBuildScores(t *testing.T) {
 	if s.AnonymizedString() != "2245bd5f,B" {
 		t.Errorf("anonymized string did not match, wont %s, got %v", "2245bd5f,B", s.AnonymizedString())
 	}
-
 	if len(s.Scores) != 10 {
 		t.Errorf("score count did not match, wont 10, got %d", len(s.Scores))
 	}

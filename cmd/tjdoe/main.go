@@ -112,8 +112,7 @@ func perform(opts *options, args []string) int {
 	if err != nil {
 		return 2
 	}
-	mapping := tjdoe.BuildMappings(students)
-	tjdoe.AnonymizeDirectory(args[0], opts.dest, mapping)
+	tjdoe.AnonymizeDirectory(args[0], opts.dest, students)
 	return outputAnonymizedScores(tjdoe, students, opts.mapping)
 }
 

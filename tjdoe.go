@@ -2,8 +2,10 @@ package tjdoe
 
 import (
 	"encoding/csv"
+	"fmt"
 	"io"
 	"math/rand"
+	"sort"
 	"strconv"
 
 	"github.com/seehuhn/mt19937"
@@ -13,7 +15,8 @@ import (
 TJDoe shows core type for processing anonymity of programs.
 */
 type TJDoe struct {
-	random *rand.Rand
+	random  *rand.Rand
+	mapping []Mapping
 }
 
 /*
@@ -26,10 +29,37 @@ func New(seed int64) *TJDoe {
 	return tjdoe
 }
 
+func convertToMappingSlice(mapping map[string]string) []Mapping {
+	results := []Mapping{}
+	for key, value := range mapping {
+		results = append(results, Mapping{fromID: key, toID: value})
+	}
+	sort.Slice(results, func(i, j int) bool {
+		return len(results[i].fromID) > len(results[j].fromID)
+	})
+	return results
+}
+
+/*
+BuildMappings creates Mapping array from given students.
+*/
+func (tjdoe *TJDoe) buildMappings(students []*Student) []Mapping {
+	mapping := map[string]string{}
+	for _, student := range students {
+		updateMapping(mapping, student.AnonymizedID, student.ID)
+		updateMapping(mapping, student.AnonymizedID, student.Name)
+		updateMapping(mapping, student.AnonymizedID, familyName(student.Name))
+		updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, familyName(student.Name)))
+	}
+	tjdoe.mapping = convertToMappingSlice(mapping)
+	return tjdoe.mapping
+}
+
 /*
 AnonymizeDirectory copies files in from directory to destination directories with given mapping.
 */
-func (tjdoe *TJDoe) AnonymizeDirectory(from, to string, mapping []Mapping) error {
+func (tjdoe *TJDoe) AnonymizeDirectory(from, to string, students []*Student) error {
+	tjdoe.buildMappings(students)
 	// TODO
 	return nil
 }
