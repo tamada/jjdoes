@@ -53,15 +53,16 @@ func isNumeric(str string) bool {
 func anonymizeFinalScore(score string) string {
 	if isNumeric(score) {
 		scoreNumber, _ := strconv.Atoi(score)
-		if scoreNumber < 60 {
+		switch {
+		case scoreNumber < 60:
 			return "F"
-		} else if scoreNumber < 70 {
+		case scoreNumber < 70:
 			return "D"
-		} else if scoreNumber < 80 {
+		case scoreNumber < 80:
 			return "C"
-		} else if scoreNumber < 90 {
+		case scoreNumber < 90:
 			return "B"
-		} else {
+		default:
 			return "A"
 		}
 	}
