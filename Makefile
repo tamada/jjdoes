@@ -34,6 +34,7 @@ endef
 
 dist: build
 	@$(call _createDist,darwin,386)
+	@$(call _createDist,darwin,amd64)
 	@$(call _createDist,windows,amd64)
 	@$(call _createDist,windows,386)
 	@$(call _createDist,linux,amd64)
