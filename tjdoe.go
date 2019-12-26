@@ -119,10 +119,7 @@ func createHeader(students []*Student) []string {
 		assignments = assignmentNames(assignments, student.Scores)
 	}
 	sort.Slice(assignments, func(i, j int) bool {
-		if len(assignments[i]) == len(assignments[j]) {
-			return strings.Compare(assignments[i], assignments[j]) <= 0
-		}
-		return len(assignments[i]) < len(assignments[j])
+		return strings.Compare(assignments[i], assignments[j]) <= 0
 	})
 	header := []string{"id", "final score"}
 	header = append(header, assignments...)

@@ -39,7 +39,7 @@ OPTIONS
     -d, --dest <DIR>       specifies destination of anonymized programs.
                            if this option was not specified, output to 'dest' directory.
     -s, --score <SCORE>    specifies id mapping file. default is 'anonymized_score.csv'
-    -s, --seed <SEED>      specifies seed for random values.
+    -S, --seed <SEED>      specifies seed for random values.
     -h, --help             print this message and exit.
     -v, --version          print version and exit.
 ROOT_DIR

@@ -12,7 +12,7 @@ func TestOutput(t *testing.T) {
 	students, _ := tjdoe.BuildScores([]string{"testdata/scores.csv"})
 	buffer := bytes.Buffer{}
 	tjdoe.OutputAnonymizedScores(students, &buffer)
-	wontResults := `id,final score,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10
+	wontResults := `id,final score,a01,a02,a03,a04,a05,a06,a07,a08,a09,a10
 2245bd5f,B,5,6,7,4,3,1,8,9,8,6
 22eb9250,F,4,3,3,2,3,,,,,4
 7382d1e7,A,10,10,10,10,10,10,,10,10,
