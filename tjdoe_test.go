@@ -9,7 +9,7 @@ import (
 
 func TestOutput(t *testing.T) {
 	tjdoe := New(1)
-	students, _ := tjdoe.BuildScores([]string{"testdata/mapping.csv"})
+	students, _ := tjdoe.BuildScores([]string{"testdata/scores.csv"})
 	buffer := bytes.Buffer{}
 	tjdoe.OutputAnonymizedScores(students, &buffer)
 	wontResults := `id,final score,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10
@@ -25,7 +25,7 @@ func TestOutput(t *testing.T) {
 
 func TestMapping(t *testing.T) {
 	tjdoe := New(1)
-	students, _ := tjdoe.BuildScores([]string{"testdata/mapping.csv"})
+	students, _ := tjdoe.BuildScores([]string{"testdata/scores.csv"})
 	mappings := tjdoe.buildMappings(students)
 	wontLength := 20
 	if len(mappings) != wontLength {
@@ -39,7 +39,7 @@ func TestMapping(t *testing.T) {
 func TestCopyDirectories(t *testing.T) {
 	// os.RemoveAll("testdata/anonymity")
 	tjdoe := New(1)
-	students, _ := tjdoe.BuildScores([]string{"testdata/mapping.csv"})
+	students, _ := tjdoe.BuildScores([]string{"testdata/scores.csv"})
 	tjdoe.AnonymizeDirectory("testdata/assignments", "testdata/anonymity", students)
 	defer os.RemoveAll("testdata/anonymity")
 

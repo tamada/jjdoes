@@ -4,7 +4,7 @@ import "testing"
 
 func TestBuildScores(t *testing.T) {
 	tjdoe := New(1)
-	students, err := tjdoe.BuildScores([]string{"testdata/mapping.csv"})
+	students, err := tjdoe.BuildScores([]string{"testdata/scores.csv"})
 	if err != nil {
 		t.Error(err)
 		return
