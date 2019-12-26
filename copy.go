@@ -11,6 +11,12 @@ import (
 	"time"
 )
 
+type copyInfo struct {
+	from string
+	to   string
+	info os.FileInfo
+}
+
 /*
 Programs in this file refers to https://github.com/otiai10/copy.
 */
@@ -19,31 +25,31 @@ func (tjdoe *TJDoe) copy(from, to string) error {
 	if err != nil {
 		return err
 	}
-	return tjdoe.copyImpl(from, to, info)
+	return tjdoe.copyImpl(&copyInfo{from: from, to: to, info: info})
 }
 
-func (tjdoe *TJDoe) copyImpl(from, to string, info os.FileInfo) error {
-	if info.Mode()&os.ModeSymlink != 0 {
-		return copySymlinks(tjdoe, from, to, info)
-	} else if info.IsDir() {
-		return copyDirectory(tjdoe, from, to, info)
+func (tjdoe *TJDoe) copyImpl(info *copyInfo) error {
+	if info.info.Mode()&os.ModeSymlink != 0 {
+		return copySymlinks(tjdoe, info)
+	} else if info.info.IsDir() {
+		return copyDirectory(tjdoe, info)
 	}
-	return copyFile(tjdoe, from, to, info)
+	return copyFile(tjdoe, info)
 }
 
-func copyDirectory(tjdoe *TJDoe, from, to string, info os.FileInfo) error {
-	originalMode := info.Mode()
-	newPath, err := makeDirectories(tjdoe, to)
+func copyDirectory(tjdoe *TJDoe, info *copyInfo) error {
+	originalMode := info.info.Mode()
+	newPath, err := makeDirectories(tjdoe, info.to)
 	if err != nil {
 		return err
 	}
 	defer os.Chmod(newPath, originalMode)
-	children, err := ioutil.ReadDir(from)
+	children, err := ioutil.ReadDir(info.from)
 	if err != nil {
 		return err
 	}
 	for _, child := range children {
-		childFrom := filepath.Join(from, child.Name())
+		childFrom := filepath.Join(info.from, child.Name())
 		childTo := filepath.Join(newPath, child.Name())
 		if err := tjdoe.copy(childFrom, childTo); err != nil {
 			return err
@@ -117,18 +123,18 @@ func copyContent(tjdoe *TJDoe, writer io.Writer, reader io.Reader) error {
 	return in.Err()
 }
 
-func copyFile(tjdoe *TJDoe, from, to string, info os.FileInfo) error {
-	parent, err := makeDirectories(tjdoe, filepath.Dir(to))
+func copyFile(tjdoe *TJDoe, info *copyInfo) error {
+	parent, err := makeDirectories(tjdoe, filepath.Dir(info.to))
 	if err != nil {
 		return err
 	}
-	dest := updateBase(tjdoe, filepath.Join(parent, filepath.Base(to)))
+	dest := updateBase(tjdoe, filepath.Join(parent, filepath.Base(info.to)))
 	writer, err := os.Create(dest)
 	if err != nil {
 		return err
 	}
 	defer writer.Close()
-	reader, err := os.Open(from)
+	reader, err := os.Open(info.from)
 	if err != nil {
 		return err
 	}
@@ -137,10 +143,10 @@ func copyFile(tjdoe *TJDoe, from, to string, info os.FileInfo) error {
 	return err
 }
 
-func copySymlinks(tjdoe *TJDoe, from, to string, info os.FileInfo) error {
-	src, err := os.Readlink(from)
+func copySymlinks(tjdoe *TJDoe, info *copyInfo) error {
+	src, err := os.Readlink(info.from)
 	if err != nil {
 		return err
 	}
-	return os.Symlink(src, to)
+	return os.Symlink(src, info.to)
 }
