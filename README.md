@@ -36,12 +36,12 @@ $ make
 $ tjdoe --help
 tjdoe [OPTIONS] <ROOT_DIR> <SCORES...>
 OPTIONS
-    -d, --dest <DIR>           specifies destination of anonymized programs.
-                               if this option was not specified, output to 'dest' directory.
-    -m, --mapping <MAPPING>    specifies id mapping file. default is `mapping.csv`
-    -s, --seed <SEED>          specifies seed for random values.
-    -h, --help                 print this message and exit.
-    -v, --version              print version and exit.
+    -d, --dest <DIR>       specifies destination of anonymized programs.
+                           if this option was not specified, output to 'dest' directory.
+    -s, --score <SCORE>    specifies id mapping file. default is 'anonymized_score.csv'
+    -s, --seed <SEED>      specifies seed for random values.
+    -h, --help             print this message and exit.
+    -v, --version          print version and exit.
 ROOT_DIR
     the directory contains the programs.  The layout of the directory is arbitrary.
     The user arbitrary defines the names of sub-directories and files.
