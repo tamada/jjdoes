@@ -41,19 +41,23 @@ func convertToMappingSlice(mapping map[string]string) []Mapping {
 	return results
 }
 
+func updateMappings(mapping map[string]string, student *Student) {
+	updateMapping(mapping, student.AnonymizedID, student.ID)
+	updateMapping(mapping, student.AnonymizedID, student.Name)
+	updateMapping(mapping, student.AnonymizedID, strings.ReplaceAll(student.Name, " ", ""))
+	updateMapping(mapping, student.AnonymizedID, familyName(student.Name))
+	updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, student.Name))
+	updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, strings.ReplaceAll(student.Name, " ", "")))
+	updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, familyName(student.Name)))
+}
+
 /*
 BuildMappings creates Mapping array from given students.
 */
 func (tjdoe *TJDoe) buildMappings(students []*Student) []Mapping {
 	mapping := map[string]string{}
 	for _, student := range students {
-		updateMapping(mapping, student.AnonymizedID, student.ID)
-		updateMapping(mapping, student.AnonymizedID, student.Name)
-		updateMapping(mapping, student.AnonymizedID, strings.ReplaceAll(student.Name, " ", ""))
-		updateMapping(mapping, student.AnonymizedID, familyName(student.Name))
-		updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, student.Name))
-		updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, strings.ReplaceAll(student.Name, " ", "")))
-		updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, familyName(student.Name)))
+		updateMappings(mapping, student)
 	}
 	tjdoe.mapping = convertToMappingSlice(mapping)
 	return tjdoe.mapping
