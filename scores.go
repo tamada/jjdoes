@@ -30,6 +30,10 @@ type Student struct {
 	Scores               map[string]int
 }
 
+func (m *Mapping) String() string {
+	return fmt.Sprintf(`{ from: "%s", to: "%s" }`, m.fromID, m.toID)
+}
+
 func (s *Student) String() string {
 	return fmt.Sprintf("%s,%s,%s", s.ID, s.Name, s.FinalScore)
 }

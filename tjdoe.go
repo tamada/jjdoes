@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"sort"
 	"strconv"
+	"strings"
 
 	"github.com/seehuhn/mt19937"
 )
@@ -48,7 +49,10 @@ func (tjdoe *TJDoe) buildMappings(students []*Student) []Mapping {
 	for _, student := range students {
 		updateMapping(mapping, student.AnonymizedID, student.ID)
 		updateMapping(mapping, student.AnonymizedID, student.Name)
+		updateMapping(mapping, student.AnonymizedID, strings.ReplaceAll(student.Name, " ", ""))
 		updateMapping(mapping, student.AnonymizedID, familyName(student.Name))
+		updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, student.Name))
+		updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, strings.ReplaceAll(student.Name, " ", "")))
 		updateMapping(mapping, student.AnonymizedID, fmt.Sprintf("%s %s", student.ID, familyName(student.Name)))
 	}
 	tjdoe.mapping = convertToMappingSlice(mapping)
@@ -60,8 +64,7 @@ AnonymizeDirectory copies files in from directory to destination directories wit
 */
 func (tjdoe *TJDoe) AnonymizeDirectory(from, to string, students []*Student) error {
 	tjdoe.buildMappings(students)
-	// TODO
-	return nil
+	return tjdoe.copy(from, to)
 }
 
 func createCsvItems(student *Student, labels []string) []string {
@@ -88,6 +91,7 @@ func (tjdoe *TJDoe) OutputAnonymizedScores(students []*Student, dest io.Writer) 
 	for _, student := range students {
 		writer.Write(createCsvItems(student, labels))
 	}
+	writer.Flush()
 	return nil
 }
 
@@ -114,6 +118,12 @@ func createHeader(students []*Student) []string {
 	for _, student := range students {
 		assignments = assignmentNames(assignments, student.Scores)
 	}
+	sort.Slice(assignments, func(i, j int) bool {
+		if len(assignments[i]) == len(assignments[j]) {
+			return strings.Compare(assignments[i], assignments[j]) <= 0
+		}
+		return len(assignments[i]) < len(assignments[j])
+	})
 	header := []string{"id", "final score"}
 	header = append(header, assignments...)
 	return header

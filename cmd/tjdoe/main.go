@@ -92,7 +92,7 @@ func printVersionAndOrHelp(prog string, opts *options) int {
 }
 
 func outputAnonymizedScores(tjdoe *tjdoe.TJDoe, students []*tjdoe.Student, dest string) int {
-	file, err := os.OpenFile(dest, os.O_CREATE, 0755)
+	file, err := os.Create(dest)
 	if err != nil {
 		fmt.Println(err.Error())
 		return 3

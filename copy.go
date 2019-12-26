@@ -3,6 +3,7 @@ package tjdoe
 import (
 	"bufio"
 	"io"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -11,7 +12,15 @@ import (
 /*
 Programs in this file refers to https://github.com/otiai10/copy.
 */
-func (tjdoe *TJDoe) copy(from, to string, info os.FileInfo) error {
+func (tjdoe *TJDoe) copy(from, to string) error {
+	info, err := os.Lstat(from)
+	if err != nil {
+		return err
+	}
+	return tjdoe.copyImpl(from, to, info)
+}
+
+func (tjdoe *TJDoe) copyImpl(from, to string, info os.FileInfo) error {
 	if info.Mode()&os.ModeSymlink != 0 {
 		return copySymlinks(tjdoe, from, to, info)
 	} else if info.IsDir() {
@@ -27,14 +36,23 @@ func copyDirectory(tjdoe *TJDoe, from, to string, info os.FileInfo) error {
 		return err
 	}
 	defer os.Chmod(newPath, originalMode)
-	// TODO implement.
-
+	children, err := ioutil.ReadDir(from)
+	if err != nil {
+		return err
+	}
+	for _, child := range children {
+		childFrom := filepath.Join(from, child.Name())
+		childTo := filepath.Join(newPath, child.Name())
+		if err := tjdoe.copy(childFrom, childTo); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
 func isExistDir(path string) bool {
 	info, err := os.Stat(path)
-	return err == nil || info.IsDir()
+	return err == nil && info.IsDir()
 }
 
 func updateLine(tjdoe *TJDoe, line string) string {
@@ -80,6 +98,7 @@ func copyContent(tjdoe *TJDoe, writer io.Writer, reader io.Reader) error {
 	for in.Scan() {
 		line := updateLine(tjdoe, in.Text())
 		writer.Write([]byte(line))
+		writer.Write([]byte("\n"))
 	}
 	return in.Err()
 }
