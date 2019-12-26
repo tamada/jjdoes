@@ -10,11 +10,17 @@ import (
 	"strings"
 )
 
+/*
+Mapping represents id mapping.
+*/
 type Mapping struct {
 	fromID string
 	toID   string
 }
 
+/*
+Student shows a student score of grade.
+*/
 type Student struct {
 	ID                   string
 	Name                 string
@@ -28,6 +34,9 @@ func (s *Student) String() string {
 	return fmt.Sprintf("%s,%s,%s", s.ID, s.Name, s.FinalScore)
 }
 
+/*
+AnonymizedString returns anonymized information of student.
+*/
 func (s *Student) AnonymizedString() string {
 	return fmt.Sprintf("%s,%s", s.AnonymizedID, s.AnonymizedFinalScore)
 }
@@ -82,7 +91,10 @@ func convertToMappingSlice(mapping map[string]string) []Mapping {
 	return results
 }
 
-func (tjdoe *TJDoe) BuildMapping(students []*Student) []Mapping {
+/*
+BuildMappings creates Mapping array from given students.
+*/
+func (tjdoe *TJDoe) BuildMappings(students []*Student) []Mapping {
 	mapping := map[string]string{}
 	for _, student := range students {
 		updateMapping(mapping, student.AnonymizedID, student.ID)
@@ -157,6 +169,9 @@ func buildScore(fileName string) ([]*Student, error) {
 	return results, nil
 }
 
+/*
+BuildScores creates array of Student from given score files.
+*/
 func (tjdoe *TJDoe) BuildScores(scoreFiles []string) ([]*Student, error) {
 	var err error
 	results := []*Student{}

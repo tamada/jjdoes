@@ -1,7 +1,7 @@
 package main
 
 import (
-	crand "crypto/rand"
+	"crypto/rand"
 	"fmt"
 	"math"
 	"math/big"
@@ -48,7 +48,7 @@ ROOT_DIR
 
 func buildFlagSet() (*flag.FlagSet, *options) {
 	opts := new(options)
-	flags := flag.NewFlagSet("jjdoes", flag.ContinueOnError)
+	flags := flag.NewFlagSet("tjdoe", flag.ContinueOnError)
 	flags.Usage = func() { fmt.Println(getHelpMessage("ttt")) }
 	flags.StringVarP(&opts.dest, "dest", "d", "dest", "specifies destination of anonymized programs")
 	flags.StringVarP(&opts.mapping, "score", "s", "anonymized_score.csv", "specifies the destination of anonymized score file.")
@@ -59,7 +59,7 @@ func buildFlagSet() (*flag.FlagSet, *options) {
 
 func (opts *options) generateSeed() int64 {
 	if opts.seed == "" {
-		seed, _ := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
+		seed, _ := rand.Int(rand.Reader, big.NewInt(math.MaxInt64))
 		return seed.Int64()
 	}
 	seed := int64(0)
@@ -112,7 +112,7 @@ func perform(opts *options, args []string) int {
 	if err != nil {
 		return 2
 	}
-	mapping := tjdoe.BuildMapping(students)
+	mapping := tjdoe.BuildMappings(students)
 	tjdoe.AnonymizeDirectory(args[0], opts.dest, mapping)
 	return outputAnonymizedScores(tjdoe, students, opts.mapping)
 }

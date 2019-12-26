@@ -9,10 +9,16 @@ import (
 	"github.com/seehuhn/mt19937"
 )
 
+/*
+TJDoe shows core type for processing anonymity of programs.
+*/
 type TJDoe struct {
 	random *rand.Rand
 }
 
+/*
+New creates and returns an instance of TJDoe by initializing given seed.
+*/
 func New(seed int64) *TJDoe {
 	tjdoe := new(TJDoe)
 	tjdoe.random = rand.New(mt19937.New())
@@ -20,6 +26,9 @@ func New(seed int64) *TJDoe {
 	return tjdoe
 }
 
+/*
+AnonymizeDirectory copies files in from directory to destination directories with given mapping.
+*/
 func (tjdoe *TJDoe) AnonymizeDirectory(from, to string, mapping []Mapping) error {
 	// TODO
 	return nil
@@ -38,6 +47,9 @@ func createCsvItems(student *Student, labels []string) []string {
 	return array
 }
 
+/*
+OutputAnonymizedScores generates score file to destination.
+*/
 func (tjdoe *TJDoe) OutputAnonymizedScores(students []*Student, dest io.Writer) error {
 	header := createHeader(students)
 	writer := csv.NewWriter(dest)
@@ -59,7 +71,7 @@ func contains(array []string, value string) bool {
 }
 
 func assignmentNames(assignments []string, scores map[string]int) []string {
-	for key, _ := range scores {
+	for key := range scores {
 		if !contains(assignments, key) {
 			assignments = append(assignments, key)
 		}
