@@ -1,0 +1,15 @@
+language: go
+go:
+    - 1.13
+
+env:
+  global:
+      - GO111MODULE=on
+      - secure: "hQmsyuNdrgfU8+PA/G4hi40MCMN3c+0dwyFxfEKfFRg7tXteRVJMvuRUvAMtG3vg8BWrremkU+m0KGeAwsOxwMJAI1u1BCOU1Vn8rnlhDvu7FKDoc45EybqG3CaSeLjdDnAo0D1BiO6fypQz7GJfvmU7BlMbBfdZDzLqa7CaIEoHw3+Vu/6v8Wa3QtKvoQBKXT1dbvDAIUUphVE9YHm6Qa9HSf5jmLTErJU8XnwzQSs29dRM6QUdCi++FH/atHMkzV2if4urF3NsWp4bT2VJOW/2gZOsTB/iwxT25yQXeCO1Rys3HAJ5E4WelGzeEb8a3XqsW8oYBibikOY/Xbxz5GXNEedxQW6j4+Vq0w7n/jQSIeRRoAIfOVQPWhLZKFJAltcghkBw41eZrjN+Q4tZfT/0JLiq6ow2ZGOcKK6WNd9v2BWWDlRYepPZzgbu1bdSLr/4g159cr6+erW5A//HKyicM2ynVTKB54Qff93kz8EDgEVjLhfN0HnKtWudPcTDPw5vU9O8iW0Q4+J5WrxjYxIeIJee6PJx5woTgboLwQqVEG78kSuRb/QvVOxFyhPRVkHUB96+4VdeNuR130WzBD0+tDC8gj2lAkZug5GZYp74Qo4pCuv9VI9FZHxUVd7ZsIRlABecXleRumEcdcWQVNtLOgsf2ajCBeC/QjF+4Cw="
+
+before_script:
+    - go get github.com/mattn/goveralls
+
+script:
+    - make test build
+    - "$GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN"
