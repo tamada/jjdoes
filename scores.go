@@ -116,6 +116,20 @@ func (tjdoe *TJDoe) anonymize(students []*Student) []*Student {
 	return students
 }
 
+func buildScore(fileName string) ([]*Student, error) {
+	file, err := os.Open(fileName)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	reader := csv.NewReader(file)
+	header, err := reader.Read()
+	if err != nil {
+		return nil, err
+	}
+	return buildStudents(reader, header), nil
+}
+
 func buildStudent(header, records []string) *Student {
 	student := &Student{ID: records[0], Name: records[1], FinalScore: records[2], Scores: map[string]int{}}
 	for i := range header[3:] {
@@ -127,18 +141,8 @@ func buildStudent(header, records []string) *Student {
 	return student
 }
 
-func buildScore(fileName string) ([]*Student, error) {
-	file, err := os.Open(fileName)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
+func buildStudents(reader *csv.Reader, header []string) []*Student {
 	results := []*Student{}
-	reader := csv.NewReader(file)
-	header, err := reader.Read()
-	if err != nil {
-		return nil, err
-	}
 	for {
 		records, err := reader.Read()
 		if err == io.EOF {
@@ -146,7 +150,7 @@ func buildScore(fileName string) ([]*Student, error) {
 		}
 		results = append(results, buildStudent(header, records))
 	}
-	return results, nil
+	return results
 }
 
 /*
