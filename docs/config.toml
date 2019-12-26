@@ -1,0 +1,37 @@
+baseURL = "https://tamada.github.io/tjdoe"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+title = "tjdoe"
+theme = "cayman-hugo-theme"
+enableEmoji = true
+googleAnalytics = "UA-62401730-8"
+
+pygmentsCodefences = true
+pygmentsStyle = "pygments"
+
+[params]
+    project_name = "tjdoe"
+    project_tagline = "anonymizing given programs for programming courses and their scores for grades"
+    dateFormat = "2006-01-02"
+
+    footer = "[![GitHub](https://img.shields.io/badge/GitHub-tamada/tjdoe-blueviolet.svg?logo=github)](https://github.com/tamada/tjdoe) Made with [Hugo](https://gohugo.io/). Theme by [Cayman](https://github.com/zwbetz-gh/cayman-hugo-theme). Deployed to [GitHub Pages](https://pages.github.com/)."
+
+    katex = true
+
+[menu]
+    [[menu.nav]]
+        name = ":house: Home"
+        url = "/"
+        weight = 10
+    [[menu.nav]]
+        name = ":anchor: Install"
+        url = "/install"
+        weight = 20
+    [[menu.nav]]
+        name = ":fork_and_knife: Usage"
+        url = "/usage"
+        weight = 30
+    [[menu.nav]]
+        name = ":smile: About"
+        url = "/about"
+        weight = 40
