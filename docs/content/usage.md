@@ -41,7 +41,7 @@ The meaning of the options above command are as follows.
     * share volumen `$PWD` in the host OS to `/home/tjdoe` in the container OS.
     * Note that `$PWD` must be the absolute path.
 
-[![Docker](https://img.shields.io/badge/docker-tamada%2Ftjdoe%3Alatest-blue?logo=docker&style=social)](https://hub.docker.com/u/tamada/tjdoe)
+[![Docker](https://img.shields.io/badge/docker-tamada%2Ftjdoe%3Alatest-blue?logo=docker&style=social)](https://hub.docker.com/r/tamada/tjdoe)
 
 ## Others
 

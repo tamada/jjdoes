@@ -17,20 +17,17 @@ title: ":house: Home"
 ## :bookmark: Table of Contents
 
 
-* [Install](install)
-    * [Homebrew](install#-homebrew)
+* [:anchor: Install](install)
+    * [:beer: Homebrew](install#-homebrew)
     * [Go lang](install#go-lang)
-    * [Build from source codes](install#-build-from-source-codes)
-* [Usage](Usage)
-    * [CLI](usage#-cli)
-    * [Docker](usage#-docker)
+    * [:hammer_and_wrench: Build from source codes](install#-build-from-source-codes)
+* [:fork_and_knife: Usage](Usage)
+    * [:paperclip: CLI](usage#-cli)
+    * [:whale: Docker](usage#-docker)
     * [Others](usage#others)
         * [Anonymity rules](usage#anonymity-rules)
         * [Example of `score.csv`](usage#example-of-scorecsv)
-* [About](about)
-    * [License](about#-license)
+* [:smile: About](about)
+    * [:scroll: License](about#-license)
     * [Developers](about#developers)
     * [`tjdoe`](about#tjdoe)
-
-
-
