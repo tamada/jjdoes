@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>:house: Home on tjdoe</title>
+    <link>https://tamada.github.io/tjdoe/</link>
+    <description>Recent content in :house: Home on tjdoe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://tamada.github.io/tjdoe/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>:anchor: Install</title>
+      <link>https://tamada.github.io/tjdoe/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tamada.github.io/tjdoe/install/</guid>
+      <description>🍺 Homebrew $ brew tap tamada/brew $ brew install tjdoe Go lang $ go get github.com/tamada/tjdoe 🛠 Build from source codes $ git clone https://github.com/tamada/tjdoe.git $ cd tjdoe $ make </description>
+    </item>
+    
+    <item>
+      <title>:fork_and_knife: Usage</title>
+      <link>https://tamada.github.io/tjdoe/usage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tamada.github.io/tjdoe/usage/</guid>
+      <description>📎 CLI $ tjdoe --help tjdoe [OPTIONS] &amp;lt;ROOT_DIR&amp;gt; &amp;lt;SCORES...&amp;gt; OPTIONS -d, --dest &amp;lt;DIR&amp;gt; specifies destination of anonymized programs. if this option was not specified, output to &amp;#39;dest&amp;#39; directory. -s, --score &amp;lt;SCORE&amp;gt; specifies id mapping file. default is &amp;#39;anonymized_score.csv&amp;#39; -S, --seed &amp;lt;SEED&amp;gt; specifies seed for random values. -h, --help print this message and exit. -v, --version print version and exit. ROOT_DIR the directory contains the programs. The layout of the directory is arbitrary.</description>
+    </item>
+    
+    <item>
+      <title>:smile: About</title>
+      <link>https://tamada.github.io/tjdoe/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tamada.github.io/tjdoe/about/</guid>
+      <description>📜 License Apache 2.0
+
+Developers  Haruaki Tamada  Github    tjdoe tjdoe means &amp;lsquo;to John/Jane Doe.&amp;rsquo;</description>
+    </item>
+    
+  </channel>
+</rss>

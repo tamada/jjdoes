@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.62.0" />
+  <link rel="stylesheet" href="https://tamada.github.io/tjdoe/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="icon" href="https://tamada.github.io/tjdoe/favicon.ico">
+  <link rel="stylesheet" href="https://tamada.github.io/tjdoe/css/cayman.87415a4997c8d6c666624ff26c8812f27f42b4cf5dc18c45fc8dcb0cd7d6d2f5.css">
+  <link rel="stylesheet" href="https://tamada.github.io/tjdoe/tjdoe.css">
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>🍴 Usage | tjdoe</title>
+</head>
+
+<body>
+  <section class="page-header">
+  
+  <img src="https://tamada.github.io/tjdoe/images/anonymity.png" class="avatar" alt="project_logo">
+  
+  <h1 class="project-name">
+    tjdoe
+  </h1>
+  <h2 class="project-tagline">
+    anonymizing given programs for programming courses and their scores for grades
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/tjdoe/" class="btn">🏠 Home</a>
+    
+      
+      
+      
+      
+      <a href="/tjdoe/install" class="btn">⚓ Install</a>
+    
+      
+      
+      
+      
+      <a href="/tjdoe/usage" class="btn">🍴 Usage</a>
+    
+      
+      
+      
+      
+      <a href="/tjdoe/about" class="btn">😄 About</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>🍴 Usage</h1>
+  <h2 id="-cli">📎 CLI</h2>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ tjdoe --help
+tjdoe <span style="color:#666">[</span>OPTIONS<span style="color:#666">]</span> &lt;ROOT_DIR&gt; &lt;SCORES...&gt;
+OPTIONS
+    -d, --dest &lt;DIR&gt;       specifies destination of anonymized programs.
+                           <span style="color:#008000;font-weight:bold">if</span> this option was not specified, output to <span style="color:#ba2121">&#39;dest&#39;</span> directory.
+    -s, --score &lt;SCORE&gt;    specifies id mapping file. default is <span style="color:#ba2121">&#39;anonymized_score.csv&#39;</span>
+    -S, --seed &lt;SEED&gt;      specifies seed <span style="color:#008000;font-weight:bold">for</span> random values.
+    -h, --help             print this message and exit.
+    -v, --version          print version and exit.
+ROOT_DIR
+    the directory contains the programs.  The layout of the directory is arbitrary.
+    The user arbitrary defines the names of sub-directories and files.
+SCORES...
+    show score file, the first row is the header, and the following rows
+    represent each student and must be formatted as follows.
+    The first column is the id, the second column shows the name by dividing
+    the surname the given name with space, the third column is the final score,
+    and the following columns represent the scores of assignments.
+</code></pre></div><h2 id="-docker">🐋 Docker</h2>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ docker run --rm -v <span style="color:#19177c">$PWD</span>:/home/tjdoe tamada/tjdoe:1.0.0 rootdir scores.csv...
+</code></pre></div><p>Above command should run on directory which has <code>scores.csv</code> and <code>rootdir</code>.</p>
+<p>The meaning of the options above command are as follows.</p>
+<ul>
+<li><code>--rm</code>
+<ul>
+<li>remove container after running Docker.</li>
+</ul>
+</li>
+<li><code>-v $PWD:/home/tjdoe</code>
+<ul>
+<li>share volumen <code>$PWD</code> in the host OS to <code>/home/tjdoe</code> in the container OS.</li>
+<li>Note that <code>$PWD</code> must be the absolute path.</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://hub.docker.com/r/tamada/tjdoe"><img src="https://img.shields.io/badge/docker-tamada%2Ftjdoe%3Alatest-blue?logo=docker&amp;style=social" alt="Docker"></a></p>
+<h2 id="others">Others</h2>
+<h3 id="anonymity-rules">Anonymity rules</h3>
+<ul>
+<li>Change directory names representing year (four-digit numbers) to <code>0000</code>.</li>
+<li>Change file names, and directory names contains id, name to anonymized id.
+<ul>
+<li>id and name are obtained from <code>scores.csv</code>.</li>
+</ul>
+</li>
+<li>Replace ids and names appearing in the content of the files, to anonymized id.
+<ul>
+<li>if there are students have the same surnames, every anonymized ids will be listed.</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-of-scorecsv">Example of <code>score.csv</code></h3>
+<pre><code class="language-csv" data-lang="csv">id,name,final score,a01,a02,a03,a04,a05,a06,a07,a08,a09,a10
+123456,Tamada Haruaki,87,5,6,7,4,3,1,8,9,8,6
+234567,Yamamoto Taro,53,4,3,3,2,3,,,,,4
+345678,山本 次郎,95,10,10,10,10,10,10,,10,10,
+</code></pre>
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    <a href="https://github.com/tamada/tjdoe"><img src="https://img.shields.io/badge/GitHub-tamada/tjdoe-blueviolet.svg?logo=github" alt="GitHub"></a> Made with <a href="https://gohugo.io/">Hugo</a>. Theme by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://pages.github.com/">GitHub Pages</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-62401730-10', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+</body>
+</html>

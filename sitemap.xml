@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://tamada.github.io/tjdoe/install/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/tjdoe/usage/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/tjdoe/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/tjdoe/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/tjdoe/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tamada.github.io/tjdoe/tags/</loc>
+  </url>
+  
+</urlset>
