@@ -1,40 +1,8 @@
-[![Build Status](https://travis-ci.com/tamada/tjdoe.svg?branch=master)](https://travis-ci.com/tamada/tjdoe)
-[![Coverage Status](https://coveralls.io/repos/github/tamada/tjdoe/badge.svg?branch=master)](https://coveralls.io/github/tamada/tjdoe?branch=master)
-[![codebeat badge](https://codebeat.co/badges/146e0708-dd30-405c-ae4b-9d1e4c2626e2)](https://codebeat.co/projects/github-com-tamada-tjdoe-master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/tamada/tjdoe)](https://goreportcard.com/report/github.com/tamada/tjdoe)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/tamada/tjdoe/blob/master/LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.0.0-yellowgreen.svg)](https://github.com/tamada/tjdoe/releases/tag/v1.0.0)
+---
+title: ":fork_and_knife: Usage"
+---
 
-# tjdoe
-
-`tjdoe` anonymizes given programs for programming courses and their scores for grades.
-
-## Install
-
-### :beer: Homebrew
-
-```sh
-$ brew tap tamada/brew
-$ brew install tjdoe
-```
-
-### Go lang
-
-```sh
-$ go get github.com/tamada/tjdoe
-```
-
-### :hammer_and_wrench: Build from source codes
-
-```sh
-$ git clone https://github.com/tamada/tjdoe.git
-$ cd tjdoe
-$ make
-```
-
-## :fork_and_knife: Usage
-
-### CLI
+## :paperclip: CLI
 
 ```sh
 $ tjdoe --help
@@ -57,10 +25,10 @@ SCORES...
     and the following columns represent the scores of assignments.
 ```
 
-### :whale: Docker
+## :whale: Docker
 
 ```sh
-$ docker run --rm -v $PWD:/home/jjdoes tamada/tjdoe:1.0.0 rootdir scores.csv...
+$ docker run --rm -v $PWD:/home/tjdoe tamada/tjdoe:1.0.0 rootdir scores.csv...
 ```
 
 Above command should run on directory which has `scores.csv` and `rootdir`.
@@ -93,13 +61,3 @@ id,name,final score,a01,a02,a03,a04,a05,a06,a07,a08,a09,a10
 234567,Yamamoto Taro,53,4,3,3,2,3,,,,,4
 345678,山本 次郎,95,10,10,10,10,10,10,,10,10,
 ```
-
-## About
-
-### Developers
-
-* [Haruaki Tamada](https://tamada.github.io) [:octocat:](https://github.com/tamada)
-
-### `tjdoe`
-
-`tjdoe` means 'to John/Jane Doe.'

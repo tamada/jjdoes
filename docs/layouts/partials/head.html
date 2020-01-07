@@ -1,0 +1,18 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {{ hugo.Generator }}
+  <link rel="stylesheet" href="{{ "css/normalize.css" | absURL }}">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  {{ $caymanScss := "scss/cayman.scss" }}
+  {{ $options := (dict "targetPath" "css/cayman.css") }}
+  {{ $caymanCss := resources.Get $caymanScss | resources.ExecuteAsTemplate $caymanScss . | toCSS $options | fingerprint }}
+  <link rel="icon" href="{{ $.Site.BaseURL }}favicon.ico">
+  <link rel="stylesheet" href="{{ $caymanCss.Permalink }}">
+  <link rel="stylesheet" href="{{ "tjdoe.css" | absURL }}">
+  <!-- Icon made by Freepik, from Flaticon, licensed by CC 3.0. -->
+  <!-- https://www.flaticon.com/free-icon/island_1530732 -->
+  {{ partial "katex.html" . }}
+  <title>{{ .Title | emojify }} | {{ $.Site.Title }}</title>
+</head>
