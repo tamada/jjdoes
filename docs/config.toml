@@ -11,6 +11,7 @@ pygmentsStyle = "pygments"
 
 [params]
     project_name = "tjdoe"
+    project_logo = "images/anonymity.png"
     project_tagline = "anonymizing given programs for programming courses and their scores for grades"
     dateFormat = "2006-01-02"
 

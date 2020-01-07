@@ -1,0 +1,17 @@
+.avatar {
+    background-color: white;
+    border: 3px solid gray;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+    height: 96px;
+    width: 96px;
+}
+
+.avatar_caption {
+    display: inline;
+    width: 50%;
+}
+.project-name {
+    display: inline-block;
+}
