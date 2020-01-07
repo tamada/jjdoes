@@ -1,10 +1,10 @@
-baseURL = "https://tamada.github.io/tjdoe"
+baseURL = "https://tamada.github.io/tjdoe/"
 languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "tjdoe"
 theme = "cayman-hugo-theme"
 enableEmoji = true
-googleAnalytics = "UA-62401730-8"
+googleAnalytics = "UA-62401730-10"
 
 pygmentsCodefences = true
 pygmentsStyle = "pygments"
