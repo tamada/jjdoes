@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://tamada.github.io/tjdoe/install/</guid>
-      <description>🍺 Homebrew $ brew tap tamada/brew $ brew install tjdoe Go lang $ go get github.com/tamada/tjdoe 🛠 Build from source codes $ git clone https://github.com/tamada/tjdoe.git $ cd tjdoe $ make </description>
+      <description>🍺 Homebrew $ brew tap tamada/brew $ brew install tjdoe Go lang $ go get github.com/tamada/tjdoe 🛠️ Build from source codes $ git clone https://github.com/tamada/tjdoe.git $ cd tjdoe $ make </description>
     </item>
     
     <item>
