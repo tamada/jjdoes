@@ -17,4 +17,3 @@ title: ":smile: About"
 ## `tjdoe`
 
 `tjdoe` means 'to John/Jane Doe.'
-

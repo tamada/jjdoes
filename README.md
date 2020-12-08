@@ -4,6 +4,8 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/tamada/tjdoe)](https://goreportcard.com/report/github.com/tamada/tjdoe)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/tamada/tjdoe/blob/master/LICENSE)
 [![Version](https://img.shields.io/badge/Version-1.0.0-yellowgreen.svg)](https://github.com/tamada/tjdoe/releases/tag/v1.0.0)
+[![Docker](https://img.shields.io/badge/docker-tamada%2Ftjdoe%3Alatest-blue?logo=docker&style=social)](https://github.com/users/tamada/packages/container/package/tjdoe)
+
 
 # tjdoe
 
@@ -60,7 +62,7 @@ SCORES...
 ### :whale: Docker
 
 ```sh
-$ docker run --rm -v $PWD:/home/jjdoes tamada/tjdoe:1.0.0 rootdir scores.csv...
+$ docker run --rm -v $PWD:/home/tjdoe tamada/tjdoe:1.0.0 rootdir scores.csv...
 ```
 
 Above command should run on directory which has `scores.csv` and `rootdir`.
@@ -73,7 +75,7 @@ The meaning of the options above command are as follows.
     * share volumen `$PWD` in the host OS to `/home/tjdoe` in the container OS.
     * Note that `$PWD` must be the absolute path.
 
-[![Docker](https://img.shields.io/badge/docker-tamada%2Ftjdoe%3Alatest-blue?logo=docker&style=social)](https://hub.docker.com/r/tamada/tjdoe)
+[![Docker](https://img.shields.io/badge/docker-tamada%2Ftjdoe%3Alatest-blue?logo=docker&style=social)](https://github.com/users/tamada/packages/container/package/tjdoe)
 
 ## Others
 
